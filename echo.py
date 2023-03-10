@@ -2,14 +2,18 @@ import streamlit as st
 import pandas as pd
 
 
-df_2022 = pd.read_csv("2022echo.csv")
+df_2022 = pd.read_csv("2022echo.csv", parse_dates=["Cosmos受付日時"])
 
 
-df_2022["Date"] = pd.to_datetime(df_2022.iloc[:, 9])
+# df_2022["Date"] = pd.to_datetime(df_2022.iloc[:, 9])
 df_2022["Month"] = df_2022["Date"].dt.strftime("%Y%m")
 
-df_nyuugai = df_2022.groupby(["Month", "入外区分"])["患者コード"].count()
-st.dataframe(df_nyuugai)
+# left_column, right_column = st.columns(2)
+nyuugai_pivot = pd.pivot_table(df_2022, index="入外区分", columns="Month", values="患者コード", aggfunc="count")
+# left_column = st.dataframe(df_nyuugai)
+# right_column = st.bar_chart(df_nyuugai)
+st.dataframe(nyuugai_pivot)
+
 
 
 #検査室分類
