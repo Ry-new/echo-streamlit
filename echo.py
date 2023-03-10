@@ -6,7 +6,7 @@ df_2022 = pd.read_csv("2022echo.csv", parse_dates=["Cosmos受付日時"])
 
 
 # df_2022["Date"] = pd.to_datetime(df_2022.iloc[:, 9])
-df_2022["Month"] = df_2022["Date"].dt.strftime("%Y%m")
+df_2022["Month"] = df_2022["Cosmos受付日時"].dt.strftime("%Y%m")
 
 # left_column, right_column = st.columns(2)
 nyuugai_pivot = pd.pivot_table(df_2022, index="入外区分", columns="Month", values="患者コード", aggfunc="count")
