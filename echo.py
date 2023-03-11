@@ -28,4 +28,4 @@ for i in range(len(df_2022)):
 st.write(df_2022["号機"].unique())
 
 df_room = df_2022.groupby(["Month", "入外区分", "号機"])["患者コード"].count()
-st.dataframe(df_room, width=600)
+st.dataframe(df_room, use_container_width=True)
